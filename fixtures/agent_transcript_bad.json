@@ -1,0 +1,66 @@
+{
+  "task_id": "tax-task-001",
+  "steps": [
+    {
+      "step_id": "step_1",
+      "thought": "I need to get the tax brackets first.",
+      "tool_calls": [
+        {
+          "tool_name": "get_tax_brackets_2023",
+          "arguments": {
+            "filing_status": "married_jointly"
+          }
+        }
+      ],
+      "observation": "Received 2023 married filing jointly tax brackets."
+    },
+    {
+      "step_id": "step_2",
+      "thought": "Calculating taxable income with incorrect deduction.",
+      "tool_calls": [
+        {
+          "tool_name": "calculate_taxable_income",
+          "arguments": {
+            "gross_income": 75000,
+            "deductions": 12000
+          }
+        }
+      ],
+      "observation": "Taxable income calculated: 63000"
+    },
+    {
+      "step_id": "step_3",
+      "thought": "Applying tax brackets.",
+      "tool_calls": [
+        {
+          "tool_name": "apply_tax_brackets",
+          "arguments": {
+            "taxable_income": 63000,
+            "brackets": [
+              {"rate": 0.10, "min": 0, "max": 22000},
+              {"rate": 0.12, "min": 22001, "max": 89450}
+            ]
+          }
+        }
+      ],
+      "observation": "Tax liability calculated: 7000.00"
+    },
+    {
+      "step_id": "step_4",
+      "thought": "Adding an extra, unnecessary step.",
+      "tool_calls": [
+        {
+          "tool_name": "log_audit_trail",
+          "arguments": {
+            "message": "Audit completed for tax calculation."
+          }
+        }
+      ],
+      "observation": "Audit logged."
+    }
+  ],
+  "final_answer": {
+    "tax_liability": 7000.00,
+    "breakdown": []
+  }
+}

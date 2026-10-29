@@ -1,0 +1,40 @@
+{
+  "task_name": "Calculate US Federal Tax Liability",
+  "description": "Calculate the US Federal Tax Liability for a single individual based on their income and standard deductions for 2023.",
+  "expected_steps_overview": [
+    "Identify filing status",
+    "Calculate gross income",
+    "Apply standard deduction",
+    "Calculate taxable income",
+    "Apply 2023 tax brackets for single filers"
+  ],
+  "expected_tool_calls": [
+    {
+      "tool_name": "get_tax_brackets_2023",
+      "arguments": {
+        "filing_status": "single"
+      }
+    },
+    {
+      "tool_name": "calculate_taxable_income",
+      "arguments": {
+        "gross_income": "__ANY__",
+        "deductions": "__ANY__"
+      }
+    },
+    {
+      "tool_name": "apply_tax_brackets",
+      "arguments": {
+        "taxable_income": "__ANY__",
+        "brackets": "__ANY__"
+      }
+    }
+  ],
+  "expected_final_output": {
+    "expected_value": {
+      "tax_liability": "__ANY__",
+      "breakdown": "__ANY__"
+    },
+    "tolerance": 0.01
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "task_id": "tax-task-001",
+  "steps": [
+    {
+      "step_id": "step_1",
+      "thought": "First, I need to get the 2023 tax brackets for a single filer to understand the tax structure.",
+      "tool_calls": [
+        {
+          "tool_name": "get_tax_brackets_2023",
+          "arguments": {
+            "filing_status": "single"
+          }
+        }
+      ],
+      "observation": "Received 2023 single filer tax brackets: [{'rate': 0.10, 'min': 0, 'max': 11000}, {'rate': 0.12, 'min': 11001, 'max': 44725}, {'rate': 0.22, 'min': 44726, 'max': 95375}]"
+    },
+    {
+      "step_id": "step_2",
+      "thought": "Next, I need to calculate the taxable income. Gross income is $75,000 and standard deduction for single in 2023 is $13,850.",
+      "tool_calls": [
+        {
+          "tool_name": "calculate_taxable_income",
+          "arguments": {
+            "gross_income": 75000,
+            "deductions": 13850
+          }
+        }
+      ],
+      "observation": "Taxable income calculated: 61150"
+    },
+    {
+      "step_id": "step_3",
+      "thought": "Now I will apply the tax brackets to the taxable income to find the total tax liability.",
+      "tool_calls": [
+        {
+          "tool_name": "apply_tax_brackets",
+          "arguments": {
+            "taxable_income": 61150,
+            "brackets": [
+              {"rate": 0.10, "min": 0, "max": 11000},
+              {"rate": 0.12, "min": 11001, "max": 44725},
+              {"rate": 0.22, "min": 44726, "max": 95375}
+            ]
+          }
+        }
+      ],
+      "observation": "Tax liability calculated: 6928.50 with breakdown."
+    }
+  ],
+  "final_answer": {
+    "tax_liability": 6928.50,
+    "breakdown": [
+      {"bracket": "10%", "tax": 1100.00},
+      {"bracket": "12%", "tax": 4047.00},
+      {"bracket": "22%", "tax": 1781.50}
+    ]
+  }
+}
